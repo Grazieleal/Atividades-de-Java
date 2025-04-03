@@ -1,0 +1,121 @@
+abstract class Figura {
+    public void exibirDetalhes() {
+        System.out.println("Detalhes da Figura:");
+    }
+}
+
+interface FiguraPlana {
+    double calcularArea();
+    double calcularPerimetro();
+}
+
+interface FiguraEspacial {
+    double calcularVolume();
+}
+
+class Circulo extends Figura implements FiguraPlana {
+    private double raio;
+
+    public Circulo(double raio) {
+        this.raio = raio;
+    }
+
+    public double calcularArea() {
+        return Math.PI * raio * raio;
+    }
+
+    public double calcularPerimetro() {
+        return 2 * Math.PI * raio;
+    }
+}
+
+class Retangulo extends Figura implements FiguraPlana {
+    private double largura, altura;
+
+    public Retangulo(double largura, double altura) {
+        this.largura = largura;
+        this.altura = altura;
+    }
+
+    public double calcularArea() {
+        return largura * altura;
+    }
+
+    public double calcularPerimetro() {
+        return 2 * (largura + altura);
+    }
+}
+
+class Triangulo extends Figura implements FiguraPlana {
+    private double lado1, lado2, lado3;
+
+    public Triangulo(double lado1, double lado2, double lado3) {
+        this.lado1 = lado1;
+        this.lado2 = lado2;
+        this.lado3 = lado3;
+    }
+
+    public double calcularArea() {
+        double s = (lado1 + lado2 + lado3) / 2;
+        return Math.sqrt(s * (s - lado1) * (s - lado2) * (s - lado3));
+    }
+
+    public double calcularPerimetro() {
+        return lado1 + lado2 + lado3;
+    }
+}
+
+class Esfera extends Figura implements FiguraEspacial {
+    private double raio;
+
+    public Esfera(double raio) {
+        this.raio = raio;
+    }
+
+    public double calcularVolume() {
+        return (4.0 / 3) * Math.PI * Math.pow(raio, 3);
+    }
+}
+
+class Cubo extends Figura implements FiguraEspacial {
+    private double lado;
+
+    public Cubo(double lado) {
+        this.lado = lado;
+    }
+
+    public double calcularVolume() {
+        return Math.pow(lado, 3);
+    }
+}
+
+class Cone extends Figura implements FiguraEspacial {
+    private double raio, altura;
+
+    public Cone(double raio, double altura) {
+        this.raio = raio;
+        this.altura = altura;
+    }
+
+    public double calcularVolume() {
+        return (Math.PI * Math.pow(raio, 2) * altura) / 3;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Circulo c = new Circulo(5);
+        Retangulo r = new Retangulo(4, 6);
+        Triangulo t = new Triangulo(3, 4, 5);
+        Esfera e = new Esfera(5);
+        Cubo cu = new Cubo(4);
+        Cone co = new Cone(3, 7);
+
+        System.out.println("Círculo -> Área: " + c.calcularArea() + ", Perímetro: " + c.calcularPerimetro());
+        System.out.println("Retângulo -> Área: " + r.calcularArea() + ", Perímetro: " + r.calcularPerimetro());
+        System.out.println("Triângulo -> Área: " + t.calcularArea() + ", Perímetro: " + t.calcularPerimetro());
+        System.out.println("Esfera -> Volume: " + e.calcularVolume());
+        System.out.println("Cubo -> Volume: " + cu.calcularVolume());
+        System.out.println("Cone -> Volume: " + co.calcularVolume());
+    }
+}
